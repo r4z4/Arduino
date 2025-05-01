@@ -1,35 +1,22 @@
-/*
-  Ping))) Sensor
-
-  This sketch reads a PING))) ultrasonic rangefinder and returns the distance
-  to the closest object in range. To do this, it sends a pulse to the sensor to
-  initiate a reading, then listens for a pulse to return. The length of the
-  returning pulse is proportional to the distance of the object from the sensor.
-
-  The circuit:
-	- +V connection of the PING))) attached to +5V
-	- GND connection of the PING))) attached to ground
-	- SIG connection of the PING))) attached to digital pin 7
-
-  created 3 Nov 2008
-  by David A. Mellis
-  modified 30 Aug 2011
-  by Tom Igoe
-
-  This example code is in the public domain.
-
-  https://docs.arduino.cc/built-in-examples/sensors/Ping/
-*/
-
-// this constant won't change. It's the pin number of the sensor's output:
 const int trigPin = 7;
 const int echoPin = 8;
+
+const int ledPin1 = 11;
+const int ledPin2 = 12;
+const int ledPin3 = 13;
+const int ledPin4 = 2;
+const int ledPin5 = 4;
 
 void setup() {
   // initialize serial communication:
   Serial.begin(9600);
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+  pinMode(ledPin1, OUTPUT);
+  pinMode(ledPin2, OUTPUT);
+  pinMode(ledPin3, OUTPUT);
+  pinMode(ledPin4, OUTPUT);
+  pinMode(ledPin5, OUTPUT);
 }
 
 void loop() {
@@ -59,6 +46,38 @@ void loop() {
   Serial.print(cm);
   Serial.print("cm");
   Serial.println();
+
+  if (inches < 5) {
+    digitalWrite(ledPin1, HIGH);
+    digitalWrite(ledPin2, LOW);
+    digitalWrite(ledPin3, LOW);
+    digitalWrite(ledPin4, LOW);
+    digitalWrite(ledPin5, LOW);
+  } else if (inches < 10 && inches > 5) {
+    digitalWrite(ledPin1, LOW);
+    digitalWrite(ledPin2, HIGH);
+    digitalWrite(ledPin3, LOW);
+    digitalWrite(ledPin4, LOW);
+    digitalWrite(ledPin5, LOW);
+  } else if (inches < 20 && inches > 10) {
+    digitalWrite(ledPin1, LOW);
+    digitalWrite(ledPin2, LOW);
+    digitalWrite(ledPin3, HIGH);
+    digitalWrite(ledPin4, LOW);
+    digitalWrite(ledPin5, LOW);
+  } else if (inches < 30 && inches > 20) {
+    digitalWrite(ledPin1, LOW);
+    digitalWrite(ledPin2, LOW);
+    digitalWrite(ledPin3, LOW);
+    digitalWrite(ledPin4, HIGH);
+    digitalWrite(ledPin5, LOW);
+  } else {
+    digitalWrite(ledPin1, LOW);
+    digitalWrite(ledPin2, LOW);
+    digitalWrite(ledPin3, LOW);
+    digitalWrite(ledPin4, LOW);
+    digitalWrite(ledPin5, HIGH);
+  }
 
   delay(100);
 }
