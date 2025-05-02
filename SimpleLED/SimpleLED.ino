@@ -2,7 +2,8 @@
 
 void setup() 
 {
-  pinMode(2, OUTPUT);
+  // pinMode(2, OUTPUT);
+  DDR2 |= (1<<PD2);
 }
 
 void loop() 
